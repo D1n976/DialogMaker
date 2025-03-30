@@ -1,0 +1,191 @@
+﻿<local:CustomWindow x:Class="DialogCreator.PreviewDialogWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:local="clr-namespace:DialogCreator"
+                    mc:Ignorable="d"
+        Title="PreviewDialogWindow" Closing="Window_Closing" Height="1080" Width="1920">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/DarkTheme.xaml"/>
+                <ResourceDictionary Source="Themes/RoatedCommands.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Alt" Key="Right" Command="{StaticResource NextDialogRow}"/>
+        <KeyBinding Modifiers="Alt" Key="Left" Command="{StaticResource BackDialogRow}"/>
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource NextDialogRow}" Executed="NextRow"/>
+        <CommandBinding Command="{StaticResource BackDialogRow}" Executed="BackRow"/>
+    </Window.CommandBindings>
+
+    <Window.DataContext>
+        <local:DialogCreatorViewModel/>
+    </Window.DataContext>
+    <DockPanel Background="#09121b">
+        <Border DockPanel.Dock="Bottom" BorderBrush="#3a3359" Background="#09121b" BorderThickness="2" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel>
+                        <Button Name="removeRightFirstImgButton"  Padding="5" Click="removeRightFirstImgButton_Click" Style="{StaticResource ResizableDarkButton}" MaxHeight="30">
+                            <Image Source="ImagesSource/remove_icon.png"/>
+                        </Button>
+                        <Button Name="openRightRightFirstImgButton" Style="{StaticResource DarkButton}" Width="50" Margin="5" Click="Button_Click_4">1</Button>
+                    </StackPanel>
+                    <StackPanel>
+                        <Button Name="removeRightSecondImgButton"  Padding="5" Click="removeRightSecondImgButton_Click" Style="{StaticResource ResizableDarkButton}" MaxHeight="30">
+                            <Image Source="ImagesSource/remove_icon.png"/>
+                        </Button>
+                        <Button Name="openRightSecondImgButton" Style="{StaticResource DarkButton}" Width="50" Margin="5" Click="Button_Click_2">2</Button>
+                    </StackPanel>
+                    <StackPanel>
+                        <Button Name="removeRightThirdImgButton"  Padding="5" Click="removeRightThirdImgButton_Click" Style="{StaticResource ResizableDarkButton}" MaxHeight="30">
+                            <Image Source="ImagesSource/remove_icon.png"/>
+                        </Button>
+                        <Button Name="openRightThirdImgButton" Style="{StaticResource DarkButton}" Width="50" Margin="5" Click="Button_Click_3">3</Button>
+                    </StackPanel>
+                    <StackPanel>
+                        <Button Name="removeRightFourthImgButton"  Padding="5" Click="removeRightFourthImgButton_Click" Style="{StaticResource ResizableDarkButton}" MaxHeight="30">
+                            <Image Source="ImagesSource/remove_icon.png"/>
+                        </Button>
+                        <Button Name="openRightFourthImgButton" Style="{StaticResource DarkButton}" Width="50" Margin="5" Click="Button_Click_1">4</Button>
+                    </StackPanel>
+                </StackPanel>
+                <Button Click="SwitchToBackRow" Style="{StaticResource DarkButton}">
+                    <TextBlock Text="Back"/>
+                </Button>
+                <Button Grid.Column="2" Click="SwitchToNextRow" Style="{StaticResource DarkButton}">
+                    <TextBlock Text="Next" />
+                </Button>
+                <Border Grid.Column="0" Grid.Row="1" Padding="2">
+                    <DockPanel>
+                        <TextBlock Text="Name" DockPanel.Dock="Left" Padding="5 0 5 5" Foreground="White"/>
+                        <StackPanel>
+                            <TextBox Text="{Binding CurrentDialogRow.LocalizadText.CharacterName}" Style="{StaticResource TextBoxStyle}" MinHeight="50" Padding="5 5 0 0"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                    <TextBlock Text="Text" DockPanel.Dock ="Top" TextAlignment="Center" Foreground="White"/>
+                    <TextBox Text="{Binding CurrentDialogRow.LocalizadText.Text}" MinHeight="150" Style="{StaticResource TextBoxStyle}" Padding="5 5 0 0"/>
+                </DockPanel>
+            </Grid>
+        </Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="3*"/>
+                <ColumnDefinition  Width="3*"/>
+                <ColumnDefinition  Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.ColumnSpan="3">
+                <Grid Name="fullImageGrid"/>
+            </Border>
+            <Border Grid.Column="0">
+                <Grid Name="leftImageGrid"/>
+            </Border>
+            <Border Grid.Column="1">
+                <Grid Name="centerImageGrid" HorizontalAlignment="Left" MinWidth="500"/>
+            </Border>
+            <Grid Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Grid.ColumnSpan="4">
+                    <Grid Name="rightFirstImageGrid"/>
+                </Border>
+                <Border Grid.Column="3" Grid.ColumnSpan="4">
+                    <Grid Name="rightFourthImageGrid"/>
+                </Border>
+                <Border Grid.Column="2" Grid.ColumnSpan="4">
+                    <Grid Name="rightThirdImageGrid"/>
+                </Border>
+                <Border Grid.Column="1" Grid.ColumnSpan="4">
+                    <Grid Name="rightSecondImageGrid"/>
+                </Border>
+            </Grid>
+
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="removeLeftImgButton" Padding="20" Click="RemoveLeftImage" Style="{StaticResource DarkButton}" MaxHeight="75" Opacity="0">
+                        <Image Source="ImagesSource/remove_icon.png"/>
+                    </Button>
+                </StackPanel>
+
+                <Button Name="openLeftImgButton" Margin="110" MaxHeight="200" MaxWidth="200" Click="OpenLeftImages" Style="{StaticResource DarkButton}" Opacity="0"/>
+
+            </DockPanel>
+            <DockPanel Grid.Column="1">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="removeCenterImgButton"  Padding="20" Click="RemoveCenterImages" Style="{StaticResource DarkButton}" MaxHeight="75" Opacity="0">
+                        <Image Source="ImagesSource/remove_icon.png"/>
+                    </Button>
+                </StackPanel>
+                <Button Name="removeFullImgButton"   DockPanel.Dock="Bottom" Padding="20" Click="RemoveFullImage" Style="{StaticResource DarkButton}" MaxHeight="50" Opacity="0">
+                    <Image Source="ImagesSource/remove_icon.png"/>
+                </Button>
+                <Button Name="openFullImgButton" Margin="0" Click="OpenFullScreenImages" Style="{StaticResource DarkButton}" Opacity="0" DockPanel.Dock="Bottom">
+                    <TextBlock Text="+" FontSize="18"></TextBlock>
+                </Button>
+                <Border>
+                    <Button Name="openCenterImgButton" Margin="110" MaxHeight="200" MaxWidth="200" Click="OpenCenterImages" Style="{StaticResource DarkButton}" Opacity="0">
+                        <TextBlock Text="+" FontSize="18"></TextBlock>
+                    </Button>
+                </Border>
+            </DockPanel>
+
+            <Expander ExpandDirection="Left" Grid.Column="2" MaxWidth="750" HorizontalAlignment="Right" IsExpanded="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Border Background= "#0a1b30" Grid.RowSpan="2" Opacity="0.5"/>
+                    <ScrollViewer Grid.Row="0">
+                        <StackPanel Name="changeCharacterPanel" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </ScrollViewer>
+                    <StackPanel Grid.Row="1">
+                        <DockPanel>
+                            <CheckBox Style = "{StaticResource CustomCheckboxStyle}" DockPanel.Dock="Left" Checked="ShowButtons" Unchecked="UnshowButtons"/>
+                            <TextBlock Style="{StaticResource DarkTextBlock}" Foreground="White" FontSize="18">Show buttons</TextBlock>
+                            <UniformGrid Rows="1">
+                                <Button Style="{StaticResource ResizableDarkButton}" Click="DecreaseOpacityButtonValue">-</Button>
+                                <TextBlock Text="{Binding OpacityButtonValue}" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                <Button Style="{StaticResource ResizableDarkButton}" Click="IncreaseOpacityButtonValue">+</Button>
+                            </UniformGrid>
+                        </DockPanel>
+                        <DockPanel>
+                            <CheckBox Name="IsinitCharactersCheckBox" Style = "{StaticResource CustomCheckboxStyle}" DockPanel.Dock="Left"/>
+                            <TextBlock Style="{StaticResource DarkTextBlock}" Foreground="White" FontSize="18">Init char from previos row</TextBlock>
+                        </DockPanel>
+                    </StackPanel>
+                </Grid>
+            </Expander>
+        </Grid>
+    </DockPanel>
+</local:CustomWindow>
