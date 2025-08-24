@@ -53,7 +53,7 @@ DialogMaker — это мощный настольный редактор на C
     Клонируйте репозиторий:
     bash
 
-    git clone https://github.com/ВАШ_АККАУНТ/ВАШ_РЕПОЗИТОРИЙ.git
+    git clone https://github.com/D1n976/DialogMaker.git
 
     Откройте файл решения DialogMaker.sln в Visual Studio 2019 или новее.
 
